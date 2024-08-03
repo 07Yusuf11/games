@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html, body {
+      height: 100%;
+    }
+    body {
+      background: url(./img/bg.jpg) no-repeat;
+      background-size: cover;
+    }
+    .btnbox {
+      width: 200px;
+      height: 300px;
+      /* background: orange; */
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      align-items: center;
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .btnbox button {
+      width: 100px;
+      height: 40px;
+      font-size: 23px;
+      background: orange;
+      color: white;
+      border-radius: 30px;
+    }
+    .map {
+      width: 1000px;
+      height: 600px;
+      background-color: black;
+      background: url(img/mapbg.png);
+      position: fixed;
+      top: 0; bottom: 0;
+      left: 0; right: 0;
+      margin: auto;
+      box-shadow: 0px 0px 100px black inset, 0px 0px 30px white;
+    }
+    .map>div {
+      width: 20px;
+      height: 20px;
+      position: absolute;
+      border-radius: 50%;
+      box-shadow: 0px 0px 10px yellow;
+    }
+    div.head{
+      background: radial-gradient(#ffc000,#ff4e00);
+    }
+    div.body{
+      background: radial-gradient(#fff369,#fa791a);
+    }
+    div.food{
+      background: radial-gradient(#a7fa64,#4f8524);
+      animation: foodAnimate 2s linear infinite;
+    }
+    @keyframes foodAnimate {
+      0%{
+        box-shadow: 0px 0px 10px white;
+      }
+      50%{
+        box-shadow: 0px 0px 150px greenyellow;
+      }
+      100%{
+        box-shadow: 0px 0px 10px white;
+      }
+    }
+
+    .score {
+      font-size: xx-large;
+      font-weight: bold;
+      color: white;
+    }
+
+    .score span {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="btnbox">
+    <div class="score">得分:&nbsp;<span>0</span></div>
+    <button id="start">开始</button>
+    <button id="pause">暂停</button>
+    <button id="restart">结束</button>
+  </div>
+  <div class="map">
+  </div>
+  <script src="./food.js"></script>
+  <script src="./snake.js"></script>
+  <script src="./game.js"></script>
+  <script>
+    const game = new Game(".map", ".score span");
+
+    const start = document.querySelector("#start");
+    const pause = document.querySelector("#pause");
+    const restart = document.querySelector("#restart");
+
+    start.onclick = function() {
+      game.start();
+    }
+
+    pause.onclick = function() {
+      game.pause();
+    }
+    
+    restart.onclick = function() {
+      game.restart();
+    }
+
+    document.onkeydown = (e) => {
+      switch (e.keyCode) {
+        case 37:
+          game.change("left");
+          break;
+        case 38:
+          game.change("top");
+          break;
+        case 39:
+          game.change("right");
+          break;
+        case 40:
+          game.change("bottom");
+          break;
+      
+        default:
+          break;
+      }
+    }
+  </script>
+</body>
+</html>
