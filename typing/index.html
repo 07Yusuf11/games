@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>typing</title>
+  <style>
+    html, body {
+      height: 1000px;
+      background-color: black;
+      overflow: hidden;
+    }
+
+    .board {
+      font-size: xx-large;
+      font-weight: bold;
+      color: white;
+      /* position: fixed; */
+    }
+
+    .char {
+      font-size: 50px;
+      font-weight: bolder;
+      color: white;
+      position: absolute;
+    }
+    .board span:nth-child(2) {
+  color: blue; /* Example style for the first span */
+}
+
+.board span:nth-child(4) {
+  color: green; /* Example style for the second span */
+}
+  </style>
+</head>
+<body>
+  <div class="board">hit:&nbsp;<span class="hit">0</span>&nbsp;miss:&nbsp;<span class="miss">0</span></div>
+  <script src="./character.js"></script>
+  <script src="./game.js"></script>
+  <script>
+    const game = new Game("body", ".hit", ".miss");
+    game.start();
+
+    document.onkeydown = (e) => {
+      // console.log(e.keyCode);
+      game.check(e.keyCode);
+    }
+  </script>
+</body>
+</html>
